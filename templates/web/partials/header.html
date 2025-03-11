@@ -1,0 +1,26 @@
+<nav class="nav">
+    <div class="nav-logo">
+        <p>NOTE GALLERY</p>
+    </div>
+    <div class="nav-menu" id="navMenu">
+        <ul>
+            <li><a href="{% url 'web:index' %}" class="link {% if is_index %}active{% endif %}">Home</a></li>
+            <li><a href="{% url 'web:service' %}" class="link {% if is_service %}active{% endif %}">Services</a></li>
+            <li><a href="{% url 'web:about' %}" class="link {% if is_about %}active{% endif %}">About</a></li>
+        </ul>
+    </div>
+    <div class="nav-button">
+        {% if not user.is_authenticated %}
+          <button class="btn white-btn" id="loginBtn" onclick="window.location.href='{% url 'auth_login' %}'">LogIn</button>
+          <button class="btn white-btn" id="registerBtn" onclick="window.location.href='{% url 'registration_register' %}'">Sign Up</button>
+          {% else %}
+          <form method="post" action="{% url 'auth_logout' %}">
+            {% csrf_token %}
+            <button class="btn white-btn" type="submit">LogOut</button>
+        </form>
+        {% endif %}
+    </div>
+    <div class="nav-menu-btn">
+        <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+    </div>
+</nav>

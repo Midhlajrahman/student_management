@@ -1,0 +1,100 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block title %}{% trans "Register for an account" %}{% endblock %}
+
+{% block content %}
+<div class="form-box">
+    <div class="register-container" id="register">
+        <div class="top">
+            <span>Have an account? <a href="#" onclick="login()">Login</a></span>
+            <header>Sign Up</header>
+        </div>
+        <form method="post" action="">
+            {% csrf_token %}
+        
+            <div class="input-box">
+                {{ form.username }}
+                <i class="bx bx-user"> <span>Username</span></i>
+            </div>
+            <div class="input-box">
+                {{ form.email }}
+                <i class="bx bx-user"> <span>Email</span></i>
+            </div>
+            <div class="input-box">
+                {{ form.password1 }}
+                <i class="bx bx-lock"> <span>Password</span></i>
+            </div>
+            <div class="input-box">
+                {{ form.password2 }}
+                <i class="bx bx-lock"> <span>Confirm Password</span></i>
+            </div>
+        
+            <div class="input-btn">
+                <input type="submit" class="submit" value="Register">
+            </div>
+            
+        </form>
+</div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const inputs = document.querySelectorAll(".input-box input");
+
+        inputs.forEach(input => {
+            const icon = input.closest(".input-box").querySelector("i span");
+
+            // Hide span on page load if input has a value
+            if (input.value.trim() !== "" && icon) {
+                icon.style.display = "none";
+            }
+
+            // Add event listener to hide span when typing
+            input.addEventListener("input", function () {
+                if (icon) {
+                    icon.style.display = this.value.trim() ? "none" : "inline";
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const userTypeInputs = document.querySelectorAll('input[name="user_type"]');
+        const facultyFields = document.getElementById("faculty-fields");
+        const studentFields = document.getElementById("student-fields");
+    
+        function toggleFields() {
+            let selectedValue = document.querySelector('input[name="user_type"]:checked').value;
+            if (selectedValue === "faculty") {
+                facultyFields.style.display = "block";
+                studentFields.style.display = "none";
+            } else {
+                facultyFields.style.display = "none";
+                studentFields.style.display = "block";
+            }
+        }
+    
+        userTypeInputs.forEach(input => {
+            input.addEventListener("change", toggleFields);
+        });
+    
+        // Run on page load
+        toggleFields();
+    });
+    </script>
+{% endblock %}
+
+
+{% comment %}
+**registration/registration_form.html**
+Used to show the form users will fill out to register. By default, has
+the following context:
+
+``form``
+    The registration form. This will be an instance of some subclass
+    of ``django.forms.Form``; consult `Django's forms documentation
+    <http://docs.djangoproject.com/en/dev/topics/forms/>`_ for
+    information on how to display this in a template.
+{% endcomment %}

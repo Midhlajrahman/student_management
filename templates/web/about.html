@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotesHub - Why, What, How</title>
+    <link rel="stylesheet" href="{% static 'web/css/style.css' %}">
+    <style>
+        *{  
+           
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: none !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        header {
+            background-color: #0056b3;
+            color: white;
+            padding: 90px 10px 10px 10px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #0056b3;
+            margin-top: 20px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        footer {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    {% include "web/partials/header.html" %}
+    <header>
+        <h1>Online Note Gallery</h1>
+    </header>
+    
+    <main>
+        <h2>Why?</h2>
+        <p>
+            In universities with 50+ affiliated colleges sharing a common curriculum, many colleges lack the infrastructure to provide students with adequate study material. As a result, students must independently collect, compile, and distribute notes within their circle. Often, after exams, these notes are discarded or passed along informally, never reaching a centralized platform.
+        </p>
+        <p>
+            This fragmented and inefficient process wastes significant amounts of time, energy, money, and even paper (through excessive photocopying).
+        </p>
+        <p>
+            Thus, <strong>Online Note Gallery</strong> was born—a platform to eliminate this repetitive cycle by creating a centralized, open-access library for sharing study materials.
+        </p>
+        
+        <h2>What?</h2>
+        <p>
+            <strong>Online Note Gallery </strong> is an open and free-for-all platform where students can:
+        </p>
+        <ul>
+            <li>Upload their study material effortlessly.</li>
+            <li>Download study resources shared by others.</li>
+            <li>Collaborate with peers and create a collective knowledge pool.</li>
+        </ul>
+        <p>Teachers can also actively contribute by sharing their resources, notes, and guidelines, further enhancing the platform's value.</p>
+        
+        <h2>How?</h2>
+        <p>
+            Even though <strong>Online Note Gallery</strong> is an open platform, its quality is safeguarded by a moderation layer. Every contribution by a student passes through <strong>Online Note Gallery admins </strong> who review, accept, or reject submissions based on relevance and quality.
+        </p>
+        <p>
+            Once approved, the content becomes publicly accessible, ensuring that only useful, high-quality material is added to the library.
+        </p>
+    </main>
+    <footer>
+        © 2025 Online Note Gallery . All Rights Reserved.
+    </footer>
+</body>
+</html>
