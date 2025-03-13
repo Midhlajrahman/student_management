@@ -10,6 +10,12 @@
             <span>Have an account? <a href="{% url 'auth_login' %}" >Login</a></span>
             <header>Sign Up</header>
         </div>
+        {% comment %} <form method="post" action="{% url 'accounts:registration_register' %}">
+            {% csrf_token %}
+            {{ form.as_p }} 
+            
+        </form> {% endcomment %}
+
         <form method="post" action="">
             {% csrf_token %}
         
@@ -38,6 +44,23 @@
 </div>
 </div>
 <script>
+    $(document).ready(function () {
+        $('#div_id_semester, #div_id_register_number, #div_id_id_number').hide();
+
+        $("#id_usertype").change(function () {
+            if ($(this).val() == "student") {
+                $('#div_id_semester, #div_id_register_number').show();
+                $('#div_id_id_number').hide();
+            } else {
+                $('#div_id_semester, #div_id_register_number').hide();
+                $('#div_id_id_number').show();
+            }
+        });
+    });
+</script>
+
+
+{% comment %} <script>
     document.addEventListener("DOMContentLoaded", function () {
         const inputs = document.querySelectorAll(".input-box input");
 
@@ -83,7 +106,7 @@
         // Run on page load
         toggleFields();
     });
-    </script>
+    </script> {% endcomment %}
 {% endblock %}
 
 

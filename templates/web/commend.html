@@ -5,23 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher-Student Chat</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .chat-container { width: 100%; max-width: 99vw; height: 90vh; background: #fff; display: flex; flex-direction: column; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); overflow: hidden; }
-        .chat-header { background: #007bff; color: white; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; }
-        .chat-box { flex: 1; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; scroll-behavior: smooth; }
-        .message { max-width: 75%; padding: 10px; border-radius: 10px; margin: 8px 0; display: flex; align-items: center; word-wrap: break-word; }
-        .message img { width: 35px; height: 35px; border-radius: 50%; margin: 5px; }
-        .teacher-message { background: #d1ecf1; align-self: flex-start; border-left: 5px solid #007bff; }
-        .student-message { background: #007bff; color: white; align-self: flex-end; border-right: 5px solid #0056b3; flex-direction: row-reverse; }
-        .chat-input-container { display: flex; padding: 10px; background: #eee; border-top: 1px solid #ccc; }
-        .chat-input { flex: 1; padding: 10px; border: none; border-radius: 5px; outline: none; font-size: 14px; }
-        .send-button { background: #007bff; color: white; border: none; padding: 10px 15px; margin-left: 10px; border-radius: 5px; cursor: pointer; font-size: 14px; }
-        .send-button:hover { background: #0056b3; }
+        /* General Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(to right, #007bff, #6610f2); display: flex; justify-content: center; align-items: center; height: 100vh; }
+
+        /* Chat Container */
+        .chat-container { 
+            width: 95vw; max-width: 500px; height: 85vh; 
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(15px); 
+            border-radius: 15px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            display: flex; flex-direction: column; overflow: hidden;
+        }
+
+        /* Chat Header */
+        .chat-header { 
+            background: linear-gradient(to right, #007bff, #6610f2); 
+            color: white; padding: 15px; text-align: center; font-size: 22px; font-weight: bold;
+            border-top-left-radius: 15px; border-top-right-radius: 15px;
+        }
+
+        /* Chat Messages */
+        .chat-box { 
+            flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; 
+            scroll-behavior: smooth;
+        }
+        .message { 
+            max-width: 80%; padding: 12px; border-radius: 15px; margin: 8px 0; 
+            display: flex; align-items: center; gap: 10px; animation: fadeIn 0.3s ease-in-out;
+        }
+        .message img { width: 40px; height: 40px; border-radius: 50%; }
+
+        /* Teacher Message */
+        .teacher-message { 
+            background: #f1f3f5; align-self: flex-start; 
+            border-left: 5px solid #007bff; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Student Message */
+        .student-message { 
+            background: #007bff; color: white; align-self: flex-end; 
+            border-right: 5px solid #0056b3; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            flex-direction: row-reverse;
+        }
+
+        /* Chat Input Area */
+        .chat-input-container { 
+            display: flex; padding: 12px; background: rgba(255,255,255,0.2);
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+        .chat-input { 
+            flex: 1; padding: 12px; border: none; border-radius: 20px; outline: none; 
+            font-size: 16px; background: rgba(255,255,255,0.5); color: white; text-indent: 10px;
+        }
+        .send-button { 
+            background: #007bff; color: white; border: none; padding: 12px 18px;
+            margin-left: 10px; border-radius: 50px; cursor: pointer; font-size: 16px;
+            transition: 0.3s; font-weight: bold;
+        }
+        .send-button:hover { background: #0056b3; transform: scale(1.1); }
+
+        /* Scrollbar Customization */
+        .chat-box::-webkit-scrollbar { width: 5px; }
+        .chat-box::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.5); border-radius: 10px; }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
     <div class="chat-container">
-        <div class="chat-header">Teacher-Student Chat</div>
+        <div class="chat-header">📢 Teacher-Student Chat</div>
         <div class="chat-box" id="chatBox">
             {% for message in messages %}
                 <div class="message {% if message.user.usertype == 'faculty' %}teacher-message{% else %}student-message{% endif %}">
@@ -32,7 +89,7 @@
         </div>
         <div class="chat-input-container">
             <input type="text" id="chatInput" class="chat-input" placeholder="Type a message...">
-            <button class="send-button" onclick="sendMessage()">Send</button>
+            <button class="send-button" onclick="sendMessage()">➤</button>
         </div>
     </div>
     

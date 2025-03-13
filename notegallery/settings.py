@@ -44,7 +44,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "student_management.urls"
+ROOT_URLCONF = "notegallery.urls"
 
 TEMPLATES = [
     {
@@ -57,12 +57,14 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'web.context_processors.user_context',
+
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = "student_management.wsgi.application"
+WSGI_APPLICATION = "notegallery.wsgi.application"
 
 
 # Database
@@ -145,6 +147,11 @@ STATIC_ROOT = BASE_DIR / "assets"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+RISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
 
 REGISTRATION_OPEN = True
 LOGIN_URL = '/accounts/login/'
