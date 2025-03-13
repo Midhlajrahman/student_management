@@ -240,3 +240,12 @@ header{
 .input-btn button{
     color: black !important;
 }
+.modal button{
+    height: 50px !important;
+    width: auto !important;
+}
+.modal .btn-close{
+    background-color: transparent !important;
+    height: auto !important;
+    width: auto !important;
+}

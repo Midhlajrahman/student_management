@@ -11,7 +11,7 @@ from .models import User
 
 class CustomRegistrationView(RegistrationView):
     form_class = CustomRegistrationForm
-    success_url = reverse_lazy("web:index")
+    success_url = reverse_lazy("core:home")
 
     def register(self, form):
         user = form.save(commit=False)
