@@ -27,6 +27,10 @@
             background-color: rgba(211, 147, 147, 0.468);
             border-radius: 20px;
             transition: background-color 0.3s, transform 0.3s;
+            
+        }
+        button.semester-btn{
+            margin: 20px;
         }
         button:hover {
             background-color: rgba(149, 18, 18, 0.8);
@@ -132,7 +136,7 @@
         <div class="y d-flex flex-row p-4 m-4">
         {% endif %}
 
-        <button onclick="document.location='{{ semester.get_absolute_url }}'">
+        <button onclick="document.location='{{ semester.get_absolute_url }}'" class="semester-btn">
             {{ semester.name }}
         </button>
 

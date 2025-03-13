@@ -7,6 +7,11 @@
             <li><a href="{% url 'web:index' %}" class="link {% if is_index %}active{% endif %}">Home</a></li>
             <li><a href="{% url 'web:service' %}" class="link {% if is_service %}active{% endif %}">Services</a></li>
             <li><a href="{% url 'web:about' %}" class="link {% if is_about %}active{% endif %}">About</a></li>
+            {% if request.user.usertye == "faculty" %}
+            <li><a href="{% url 'core:home' %}" class="link {% if is_about %}active{% endif %}">Department</a></li>
+            {% else %}
+            <li><a href="{% url 'core:semester_list' %}?department_id={{ request.user.department.id }}" class="link {% if is_about %}active{% endif %}">Semester</a></li>
+            {% endif %}
         </ul>
     </div>
     <div class="nav-button">

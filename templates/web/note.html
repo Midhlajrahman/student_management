@@ -84,7 +84,9 @@ a:hover {
                 <th>#</th>
                 <th>Note Name</th>
                 <th>File</th>
+                {% if request.user.usertype == "faculty" %}
                 <th>Actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -93,6 +95,7 @@ a:hover {
                 <td>{{ forloop.counter }}</td>
                 <td>{{ note.name }}</td>
                 <td><a href="{{ note.file.url }}" target="_blank">View PDF</a></td>
+                {% if request.user.usertype == "faculty" %}
                 <td>
                     <a href="{{note.get_update_url}}" class="btn btn-sm btn-primary">
                         <i class="bi bi-pencil-square"></i>
@@ -101,6 +104,8 @@ a:hover {
                         <i class="bi bi-trash"></i>
                     </a>
                 </td>
+                {% endif %}
+
             </tr>
             {% empty %}
             <tr>
