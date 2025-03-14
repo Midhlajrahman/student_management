@@ -10,114 +10,91 @@
             <span>Have an account? <a href="{% url 'auth_login' %}" >Login</a></span>
             <header>Sign Up</header>
         </div>
-        {% comment %} <form method="post" action="{% url 'accounts:registration_register' %}">
-            {% csrf_token %}
-            {{ form.as_p }} 
-            
-        </form> {% endcomment %}
 
         <form method="post" action="">
             {% csrf_token %}
         
             <div class="input-box">
+                {{ form.usertype }}
+            </div>
+        
+            <div class="input-box student-field teacher-field">
+                {{ form.full_name }}
+            </div>
+        
+            <div class="input-box student-field" id="registerNumber">
+                {{ form.register_number }}
+            </div>
+        
+            <div class="input-box teacher-field" id="idNumber">
+                {{ form.id_number }}
+            </div>
+        
+            <div class="input-box student-field" id="semester">
+                {{ form.semester }}
+            </div>
+        
+            <div class="input-box student-field teacher-field">
+                {{ form.department }}
+            </div>
+        
+            <div class="input-box student-field teacher-field">
                 {{ form.username }}
-                <i class="bx bx-user"> <span>Username</span></i>
             </div>
-            <div class="input-box">
+        
+            <div class="input-box student-field teacher-field">
                 {{ form.email }}
-                <i class="bx bx-user"> <span>Email</span></i>
             </div>
-            <div class="input-box">
+        
+            <div class="input-box student-field teacher-field">
                 {{ form.password1 }}
-                <i class="bx bx-lock"> <span>Password</span></i>
             </div>
-            <div class="input-box">
+        
+            <div class="input-box student-field teacher-field">
                 {{ form.password2 }}
-                <i class="bx bx-lock"> <span>Confirm Password</span></i>
             </div>
         
             <div class="input-btn">
                 <input type="submit" class="submit" value="Register">
             </div>
-            
         </form>
+        
+        
+    </div>
 </div>
+
 </div>
-<script>
-    $(document).ready(function () {
-        $('#div_id_semester, #div_id_register_number, #div_id_id_number').hide();
-
-        $("#id_usertype").change(function () {
-            if ($(this).val() == "student") {
-                $('#div_id_semester, #div_id_register_number').show();
-                $('#div_id_id_number').hide();
-            } else {
-                $('#div_id_semester, #div_id_register_number').hide();
-                $('#div_id_id_number').show();
-            }
-        });
-    });
-</script>
-
-
-{% comment %} <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const inputs = document.querySelectorAll(".input-box input");
-
-        inputs.forEach(input => {
-            const icon = input.closest(".input-box").querySelector("i span");
-
-            // Hide span on page load if input has a value
-            if (input.value.trim() !== "" && icon) {
-                icon.style.display = "none";
-            }
-
-            // Add event listener to hide span when typing
-            input.addEventListener("input", function () {
-                if (icon) {
-                    icon.style.display = this.value.trim() ? "none" : "inline";
-                }
-            });
-        });
-    });
-</script>
-
+{% endblock %}
+{% block js %}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const userTypeInputs = document.querySelectorAll('input[name="user_type"]');
-        const facultyFields = document.getElementById("faculty-fields");
-        const studentFields = document.getElementById("student-fields");
-    
+        const userTypeSelect = document.querySelector("[name='usertype']");
+        const studentFields = document.querySelectorAll(".student-field");
+        const teacherFields = document.querySelectorAll(".teacher-field");
+
         function toggleFields() {
-            let selectedValue = document.querySelector('input[name="user_type"]:checked').value;
-            if (selectedValue === "faculty") {
-                facultyFields.style.display = "block";
-                studentFields.style.display = "none";
-            } else {
-                facultyFields.style.display = "none";
-                studentFields.style.display = "block";
+            const userType = userTypeSelect.value;
+
+            if (userType === "student") {
+                studentFields.forEach(field => field.style.display = "block");
+                teacherFields.forEach(field => {
+                    if (!field.classList.contains("student-field")) {
+                        field.style.display = "none";
+                    }
+                });
+            } else if (userType === "faculty") {
+                teacherFields.forEach(field => field.style.display = "block");
+                studentFields.forEach(field => {
+                    if (!field.classList.contains("teacher-field")) {
+                        field.style.display = "none";
+                    }
+                });
             }
         }
-    
-        userTypeInputs.forEach(input => {
-            input.addEventListener("change", toggleFields);
-        });
-    
-        // Run on page load
-        toggleFields();
+
+        userTypeSelect.addEventListener("change", toggleFields);
+        toggleFields();  // Run on page load to apply the correct state
     });
-    </script> {% endcomment %}
-{% endblock %}
-
-
-{% comment %}
-**registration/registration_form.html**
-Used to show the form users will fill out to register. By default, has
-the following context:
-
-``form``
-    The registration form. This will be an instance of some subclass
-    of ``django.forms.Form``; consult `Django's forms documentation
-    <http://docs.djangoproject.com/en/dev/topics/forms/>`_ for
-    information on how to display this in a template.
-{% endcomment %}
+</script>
+</script>
+{% endblock js %}

@@ -7,19 +7,17 @@
 <div class="form-box">
     <div class="login-container" id="login">
         <div class="top">
-            <span>Don't have an account? <a href="{% url 'registration_register' %}">Sign Up</a></span>
+            <span>Don't have an account? <a href="{% url 'accounts:registration_register' %}">Sign Up</a></span>
             <header>Login</header>
         </div>
 <form method="post" action="">
     {% csrf_token %}
     <div class="input-box">
-        {{ form.username }}
-        <i class="bx bx-user"> <span>Username</span></i>
+        <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username" placeholder="Username">
     </div>
     
     <div class="input-box">
-        {{ form.password }}
-        <i class="bx bx-lock-alt"> <span>Password</span></i>
+        <input type="password" name="password" autocomplete="current-password" required="" id="id_password" placeholder="Password">
     </div>
 
     <div class="input-btn">
